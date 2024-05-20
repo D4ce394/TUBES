@@ -40,6 +40,30 @@ func view_belanja(){
 	
 }
 
+func view_bayar(keranjang [NMAX]data){
+	var kosong data
+	var tBarang [NMAX]int
+	var tBelanja, uang int
+	fmt.Printf("%-35s %-15s %-18s %s \n", "Nama Barang", "Banyak", "Harga", "Total")
+	for i := 0; keranjang[i] != kosong; i++ {
+		tBarang[i] = keranjang[i].harga*keranjang[i].stok
+		tBelanja += tBarang[i]
+		fmt.Printf("%-35s %-15d Rp.%-15d Rp.%d \n", keranjang[i].nama, keranjang[i].stok, keranjang[i].harga, tBarang[i])
+	}
+	tBelanja += tBelanja/10
+	fmt.Println()
+	fmt.Printf("%-35s %-15s Rp.%-15d %s \n", "PPN 10%", "", tBelanja/10, "")
+	fmt.Printf("%-35s %-15s %-18s Rp.%d \n", "Total Belanja", "", "", tBelanja)
+	fmt.Print("Uang yang dibayarkan: ")
+	fmt.Scan(&uang)
+	for uang < tBelanja {
+		fmt.Println("Uang kurang")
+		fmt.Print("Uang yang dibayarkan: ")
+		fmt.Scan(&uang)
+	}
+	fmt.Println("Uang kembalian:", tBelanja - uang)
+}
+
 func list_barang(){
 	fmt.Println("               List Barang              ") // nampilin database
 	fmt.Println("----------------------------------------")
