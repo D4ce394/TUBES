@@ -126,7 +126,8 @@ func data_gudang(){
 }
 
 func show_database(){
-	for i:=0; i < 18; i++ {
+	var kosong data
+	for i:=0; gudang[i] != kosong; i++ {
 		fmt.Printf("%-11d %-35s %-16s %-15d %d \n",gudang[i].index, gudang[i].nama, gudang[i].kategori, gudang[i].harga, gudang[i].stok)
 	}
 	fmt.Println()

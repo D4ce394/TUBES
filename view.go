@@ -15,10 +15,10 @@ func index(){
 	fmt.Println("1. Belanja")
 	fmt.Println("2. List Data Barang")
 	fmt.Println("3. Log")
-	fmt.Println("4. Exit")
+	fmt.Println("0. Exit")
 	fmt.Println("")
 	fmt.Println("----------------------------------------")
-	fmt.Scanln(&pilih)
+	fmt.Scan(&pilih)
 	if pilih == 1 {
 		belanja()
 	} else if pilih == 2 {
@@ -61,14 +61,33 @@ func view_bayar(keranjang [NMAX]data){
 		fmt.Print("Uang yang dibayarkan: ")
 		fmt.Scan(&uang)
 	}
-	fmt.Println("Uang kembalian:", tBelanja - uang)
+	fmt.Println("Uang kembalian:", uang - tBelanja)
 }
 
 func list_barang(){
+	var opsi int
 	fmt.Println("               List Barang              ") // nampilin database
 	fmt.Println("----------------------------------------")
 	header_tabel_database()
 	show_database()
+	fmt.Println("Opsi :")
+	fmt.Println("1. Urutkan tampilan")
+	fmt.Println("2. Tambah data") 
+	fmt.Println("3. Update data") 
+	fmt.Println("4. Delete data")
+	fmt.Println("0. Menu")
+	fmt.Scan(&opsi)
+	if opsi == 1 {
+		view_urutan()
+	} else if opsi == 2 {
+		create_data()
+	} else if opsi == 3 {
+		update_data()
+	} else if opsi == 4 {
+		delete_data()
+	} else {
+		index()
+	}
 	fmt.Println("----------------------------------------")
 }
 
@@ -88,4 +107,35 @@ func header_tabel_database(){
 	// fmt.Println()
 
 	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Stok")
+}
+
+func view_urutan() {
+	var opsi int
+	fmt.Println("----------------------------------------")
+	fmt.Println("Pilih opsi urutan data")
+	fmt.Println("1. ID Ascending")
+	fmt.Println("2. ID Decending")
+	fmt.Println("3. Nama produk ascending")
+	fmt.Println("4. Nama produk decending")
+	fmt.Println("5. Kategori ascending")
+	fmt.Println("6. Kategori decending")
+	fmt.Println("0. Kembali")
+	fmt.Println("----------------------------------------")
+	fmt.Scan(&opsi)
+	if opsi == 1 {
+		urut_id_naik()
+	} else if opsi == 2 {
+		urut_id_turun()
+	} else if opsi == 3 {
+		urut_produk_naik()
+	} else if opsi == 4 {
+		urut_produk_turun()
+	} else if opsi == 5 {
+		urut_kategori_naik()
+	} else if opsi == 6 {
+		urut_kategori_turun()
+	} else {
+		list_barang()
+	}
+
 }
