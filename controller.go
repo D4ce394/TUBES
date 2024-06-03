@@ -52,7 +52,14 @@ func cari_id_barang(idx *int) {
 
 func bayar(keranjang [NMAX]data) {
 	view_bayar(keranjang)
-
+	var kosong data
+	for i := 0; keranjang[i] != kosong; i++ {
+		for j := 0; gudang[j] != kosong; j++ {
+			if keranjang[i].index == gudang[j].index {
+				gudang[j].stok -= keranjang[i].stok
+			}
+		}
+	}
 }
 
 func isi_keranjang(keranjang *[NMAX]data, x, n int) {
