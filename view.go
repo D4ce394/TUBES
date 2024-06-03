@@ -1,56 +1,54 @@
 package main
 
-import(
+import (
 	"fmt"
-	"os"
 )
 
-func index(){
-	var pilih int
-
-	fmt.Println("----------------------------------------")
-	fmt.Println("                 DR.Mart                ")
-	fmt.Println("")
-	fmt.Println("Pilih:")
-	fmt.Println("1. Belanja")
-	fmt.Println("2. List Data Barang")
-	fmt.Println("3. Log")
-	fmt.Println("0. Exit")
-	fmt.Println("")
-	fmt.Println("----------------------------------------")
-	fmt.Scan(&pilih)
-	if pilih == 1 {
-		belanja()
-	} else if pilih == 2 {
-		list_barang()
-	} else if pilih == 3 {
-		log()
-	} else {
-		os.Exit(0)
+func index() {
+	var pilih int = -1
+	for pilih != 0 {
+		fmt.Println("----------------------------------------")
+		fmt.Println("                 DR.Mart                ")
+		fmt.Println("")
+		fmt.Println("Pilih:")
+		fmt.Println("1. Belanja")
+		fmt.Println("2. List Data Barang")
+		fmt.Println("3. Log")
+		fmt.Println("0. Exit")
+		fmt.Println("")
+		fmt.Println("----------------------------------------")
+		fmt.Scan(&pilih)
+		if pilih == 1 {
+			belanja()
+		} else if pilih == 2 {
+			list_barang()
+		} else if pilih == 3 {
+			log()
+		}
 	}
 }
 
-func view_belanja(){
+func view_belanja() {
 	fmt.Println("----------------------------------------")
 	fmt.Println("              View Belanja              ")
 	fmt.Println("----------------------------------------")
-	fmt.Print("nama Barang : ") // search barang dari data
+	fmt.Print("Nama Barang : ") // search barang dari data
 
 	// nampilin hasil search barang
-	
+
 }
 
-func view_bayar(keranjang [NMAX]data){
+func view_bayar(keranjang [NMAX]data) {
 	var kosong data
 	var tBarang [NMAX]int
 	var tBelanja, uang int
 	fmt.Printf("%-35s %-15s %-18s %s \n", "Nama Barang", "Banyak", "Harga", "Total")
 	for i := 0; keranjang[i] != kosong; i++ {
-		tBarang[i] = keranjang[i].harga*keranjang[i].stok
+		tBarang[i] = keranjang[i].harga * keranjang[i].stok
 		tBelanja += tBarang[i]
 		fmt.Printf("%-35s %-15d Rp.%-15d Rp.%d \n", keranjang[i].nama, keranjang[i].stok, keranjang[i].harga, tBarang[i])
 	}
-	tBelanja += tBelanja/10
+	tBelanja += tBelanja / 10
 	fmt.Println()
 	fmt.Printf("%-35s %-15s Rp.%-15d %s \n", "PPN 10%", "", tBelanja/10, "")
 	fmt.Printf("%-35s %-15s %-18s Rp.%d \n", "Total Belanja", "", "", tBelanja)
@@ -61,44 +59,44 @@ func view_bayar(keranjang [NMAX]data){
 		fmt.Print("Uang yang dibayarkan: ")
 		fmt.Scan(&uang)
 	}
-	fmt.Println("Uang kembalian:", uang - tBelanja)
+	fmt.Println("Uang kembalian:", uang-tBelanja)
 }
 
-func list_barang(){
-	var opsi int
-	fmt.Println("               List Barang              ") // nampilin database
-	fmt.Println("----------------------------------------")
-	header_tabel_database()
-	show_database()
-	fmt.Println("Opsi :")
-	fmt.Println("1. Urutkan tampilan")
-	fmt.Println("2. Tambah data") 
-	fmt.Println("3. Update data") 
-	fmt.Println("4. Delete data")
-	fmt.Println("0. Menu")
-	fmt.Scan(&opsi)
-	if opsi == 1 {
-		view_urutan()
-	} else if opsi == 2 {
-		create_data()
-	} else if opsi == 3 {
-		update_data()
-	} else if opsi == 4 {
-		delete_data()
-	} else {
-		index()
+func list_barang() {
+	var opsi int = -1
+	for opsi != 0 {
+		fmt.Println("               List Barang              ")
+		fmt.Println("----------------------------------------")
+		header_tabel_database()
+		show_database()
+		fmt.Println("Opsi :")
+		fmt.Println("1. Urutkan tampilan")
+		fmt.Println("2. Tambah data")
+		fmt.Println("3. Update data")
+		fmt.Println("4. Delete data")
+		fmt.Println("0. Menu")
+		fmt.Scan(&opsi)
+		if opsi == 1 {
+			view_urutan()
+		} else if opsi == 2 {
+			create_data()
+		} else if opsi == 3 {
+			update_data()
+		} else if opsi == 4 {
+			delete_data()
+		}
+		fmt.Println("----------------------------------------")
 	}
-	fmt.Println("----------------------------------------")
 }
 
-func log(){
+func log() {
 	fmt.Println("               Log Barang               ") // nampilin data log pembelanjaan
 	fmt.Println("----------------------------------------")
 	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Banyak")
 	fmt.Println("----------------------------------------")
 }
 
-func header_tabel_database(){
+func header_tabel_database() {
 	// fmt.Print(" NO ")
 	// fmt.Print("        Nama Barang         ")
 	// fmt.Print("  Kategori  ")
@@ -134,8 +132,5 @@ func view_urutan() {
 		urut_kategori_naik()
 	} else if opsi == 6 {
 		urut_kategori_turun()
-	} else {
-		list_barang()
 	}
-
 }
