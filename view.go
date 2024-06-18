@@ -10,13 +10,13 @@ func index() {
 		fmt.Println("----------------------------------------")
 		fmt.Println("                 DR.Mart                ")
 		fmt.Println("")
-		fmt.Println("Pilih:")
 		fmt.Println("1. Belanja")
 		fmt.Println("2. List Data Barang")
 		fmt.Println("3. Log")
 		fmt.Println("0. Exit")
 		fmt.Println("")
 		fmt.Println("----------------------------------------")
+		fmt.Print("Pilih Menu: ")
 		fmt.Scan(&pilih)
 		if pilih == 1 {
 			belanja()
@@ -29,9 +29,9 @@ func index() {
 }
 
 func view_belanja() {
-	fmt.Println("----------------------------------------")
-	fmt.Println("              View Belanja              ")
-	fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------------------------------------------------------")
+	fmt.Printf("%52s \n","View Belanja")
+	fmt.Println("----------------------------------------------------------------------------------------")
 	fmt.Print("Nama Barang : ") // search barang dari data
 
 	// nampilin hasil search barang
@@ -93,7 +93,7 @@ func logHeader() {
 	var omset int
 	fmt.Println("               Log Barang               ") // nampilin data log pembelanjaan-------------
 	fmt.Println("-------------------------------------------------------------------------------------------")
-	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "No", "Nama Barang", "Kategori", "Banyak", "Harga")
+	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "No", "Nama Barang", "Kategori", "Jumlah", "Harga")
 	fmt.Println("-------------------------------------------------------------------------------------------")
 	for i:=0; i < panjang_log(); i++{
 		fmt.Printf("%-11d %-35s %-16s %-15d %d \n", log[i].index, log[i].nama, log[i].kategory, log[i].jumlah, log[i].total)
@@ -134,14 +134,9 @@ func menu_log(){
 
 
 func header_tabel_database() {
-	// fmt.Print(" NO ")
-	// fmt.Print("        Nama Barang         ")
-	// fmt.Print("  Kategori  ")
-	// fmt.Print("       Harga        ")
-	// fmt.Print("  stok  ")
-	// fmt.Println()
-
+	fmt.Println("----------------------------------------------------------------------------------------")
 	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Stok")
+	fmt.Println("----------------------------------------------------------------------------------------")
 }
 
 func view_urutan() {
@@ -156,6 +151,7 @@ func view_urutan() {
 	fmt.Println("6. Kategori decending")
 	fmt.Println("0. Kembali")
 	fmt.Println("----------------------------------------")
+	fmt.Print("Pilih Opsi Data Barang")
 	fmt.Scan(&opsi)
 	if opsi == 1 {
 		urut_id_naik()

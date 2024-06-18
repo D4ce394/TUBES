@@ -38,8 +38,6 @@ func belanja() {
 		if opsi_sub == 2 {
 			bayar(keranjang)
 			catat_Log(id_barang, banyak_barang)
-			// fmt.Println(log[0].nama)
-			// fmt.Println(panjang_log())
 		}
 	}
 
@@ -75,7 +73,9 @@ func isi_keranjang(keranjang *[NMAX]data, x, n int) {
 	keranjang[i] = gudang[x]
 	keranjang[i].stok = n
 
-	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Banyak")
+	fmt.Println("----------------------------------------------------------------------------------------")
+	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Jumlah")
+	fmt.Println("----------------------------------------------------------------------------------------")
 	for k := 0; keranjang[k] != kosong; k++ {
 		fmt.Printf("%-11d %-35s %-16s %-15d %d \n", keranjang[i].index, keranjang[i].nama, keranjang[i].kategori, keranjang[i].harga, keranjang[i].stok)
 	}
