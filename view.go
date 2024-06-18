@@ -23,7 +23,7 @@ func index() {
 		} else if pilih == 2 {
 			list_barang()
 		} else if pilih == 3 {
-			log()
+			logHeader()
 		}
 	}
 }
@@ -89,12 +89,49 @@ func list_barang() {
 	}
 }
 
-func log() {
-	fmt.Println("               Log Barang               ") // nampilin data log pembelanjaan
-	fmt.Println("----------------------------------------")
-	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "ID", "Nama Barang", "Kategori", "Harga", "Banyak")
-	fmt.Println("----------------------------------------")
+func logHeader() {
+	var omset int
+	fmt.Println("               Log Barang               ") // nampilin data log pembelanjaan-------------
+	fmt.Println("-------------------------------------------------------------------------------------------")
+	fmt.Printf("%-11s %-35s %-16s %-15s %s \n", "No", "Nama Barang", "Kategori", "Banyak", "Harga")
+	fmt.Println("-------------------------------------------------------------------------------------------")
+	for i:=0; i < panjang_log(); i++{
+		fmt.Printf("%-11d %-35s %-16s %-15d %d \n", log[i].index, log[i].nama, log[i].kategory, log[i].jumlah, log[i].total)
+			omset = omset + log[i].total
+	}
+	log_footer(omset)
+	menu_log()
+
 }
+
+func log_footer(omset int){
+	fmt.Println("-------------------------------------------------------------------------------------------")
+	fmt.Printf("%23s %62d \n", "Total Omset", omset)
+	fmt.Printf("%33s %52d \n", "Total Omset setelah PPH 10%", omset-(omset*10)/100)
+}
+
+func menu_log(){
+	fmt.Println("-------------------------------------------------------------------------------------------")
+	fmt.Println("Menu Log")	
+	fmt.Println()
+	fmt.Println("Pilih: ")
+	fmt.Println("1. Urut Log Menaik (ASCENDING)")
+	fmt.Println("2. Urut Log Menurun (DESCENDING)")
+	fmt.Println("0. Kembali")
+
+	var pilihLog int
+	fmt.Scan(&pilihLog)
+	for pilihLog != 0{
+		if pilihLog == 1 {
+			logMenaik()
+		}else if pilihLog == 2 {
+			logMenurun()
+		}
+	}
+	index()
+}
+
+
 
 func header_tabel_database() {
 	// fmt.Print(" NO ")

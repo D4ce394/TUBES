@@ -11,6 +11,11 @@ type data struct {
 	stok int
 }
 
+type logData struct {
+	index, jumlah, total int
+	nama, kategory string
+}
+var log [NMAX]logData
 
 var gudang [NMAX]data
 func data_gudang(){

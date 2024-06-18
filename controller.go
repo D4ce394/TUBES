@@ -37,6 +37,9 @@ func belanja() {
 		fmt.Scan(&opsi_sub)
 		if opsi_sub == 2 {
 			bayar(keranjang)
+			catat_Log(id_barang, banyak_barang)
+			// fmt.Println(log[0].nama)
+			// fmt.Println(panjang_log())
 		}
 	}
 
@@ -58,6 +61,7 @@ func bayar(keranjang [NMAX]data) {
 			if keranjang[i].index == gudang[j].index {
 				gudang[j].stok -= keranjang[i].stok
 			}
+
 		}
 	}
 }
@@ -262,50 +266,6 @@ func create_data() {
 	fmt.Println("Masukkan STOK barang:")
 	fmt.Scan(&gudang[n].stok)
 
-	// for i := 0; gudang[i] != kosong ; i++ {
-	// 	if gudang[i+1] == kosong {
-	// 		fmt.Println("Masukkan data dengan urutan sebagai berikut:")
-	// 		// fmt.Println("Id, Nama barang (Spasi menggunakan _), kategori, harga, dan stok barang")
-	// 		// fmt.Scan(&gudang[i].index, &gudang[i].nama, &gudang[i].kategori, &gudang[i].harga, &gudang[i].stok)
-	// 		fmt.Println("Masukkan ID barang:")
-	// 		fmt.Scan(&gudang[i+1].index)
-	// 		for gudang[i+1].index == nilInt {
-	// 			fmt.Println("ID HARUS DI ISI!!")
-	// 			fmt.Println("Masukkan ID barang:")
-	// 			fmt.Scan(&gudang[i+1].index)
-	// 		}
-	// 		fmt.Println("Masukkan NAMA barang:")
-	// 		fmt.Println("*Catatan : Gunakan '_' sebagai pengganti spasi!!")
-	// 		fmt.Scan(&gudang[i+1].nama)
-	// 		for gudang[i+1].nama == nilStr {
-	// 			fmt.Println("NAMA HARUS DI ISI!!")
-	// 			fmt.Println("Masukkan NAMA barang:")
-	// 			fmt.Scan(&gudang[i+1].nama)
-	// 		}
-	// 		fmt.Println("Masukkan KATEGORI barang:")
-	// 		fmt.Scan(&gudang[i+1].kategori)
-	// 		for gudang[i+1].kategori == nilStr {
-	// 			fmt.Println("KATEGORI HARUS DI ISI!!")
-	// 			fmt.Println("Masukkan KATEGORI barang:")
-	// 			fmt.Scan(&gudang[i+1].kategori)
-	// 		}
-	// 		fmt.Println("Masukkan HARGA barang:")
-	// 		fmt.Scan(&gudang[i+1].harga)
-	// 		for gudang[i+1].harga == nilInt {
-	// 			fmt.Println("HARGA HARUS DI ISI!!")
-	// 			fmt.Println("Masukkan HARGA barang:")
-	// 			fmt.Scan(&gudang[i+1].harga)
-	// 		}
-	// 		fmt.Println("Masukkan STOK barang:")
-	// 		fmt.Scan(&gudang[i+1].stok)
-	// 		for gudang[i+1].stok == nilInt {
-	// 			fmt.Println("STOK HARUS DI ISI!!")
-	// 			fmt.Println("Masukkan STOK barang:")
-	// 			fmt.Scan(&gudang[i+1].stok)
-	// 		}
-	// 	}
-	// }
-
 }
 
 func update_data() {
@@ -346,7 +306,7 @@ func delete_data() {
 	fmt.Println("YES untuk melanjutkan")
 	fmt.Println("NO untuk kembali")
 	fmt.Scan(&yakin)
-	if yakin == "YES" {
+	if yakin == "YES" || yakin == "yes" {
 		for i := 0; i < n; i++ {
 			if gudang[i].index == id {
 				for i < n {
@@ -377,3 +337,62 @@ func UnderscoreToSpace(x *string) {
 	uppercase(kata, n)
 	*x = string(kata)
 }
+
+func catat_Log(id, jumlah int){
+	i := panjang_log()
+	harga := gudang[id].harga * jumlah
+	total := harga + (harga * 10) / 100
+	log[i].index = i+1
+	log[i].nama = gudang[id].nama
+	log[i].kategory = gudang[id].kategori
+	log[i].jumlah = jumlah
+	log[i].total = total
+}
+
+func panjang_log()int{
+	var kosong logData
+	s := 0
+	for i:= 0;log[i] != kosong;i++{
+		s++
+	}
+	return s
+}
+
+func logMenaik(){
+	n := panjang_log()
+	pass := 1
+	for pass <= n-1{
+		max := pass-1
+		i := pass
+		for i < n{
+			if log[max].total < log[i].total {
+				max = i
+			}
+			i++
+		}
+		temp := log[pass-1]
+		log[pass-1] = log[max]
+		log[max] = temp
+		pass++
+	}
+	fmt.Println("Sorting Log Menaik (ASCENDING)")
+	logHeader()
+}
+
+func logMenurun(){
+	n := panjang_log()
+	pass := 1
+	for pass <= n-1{
+		i := pass
+		temp := log[pass]
+		for i > 0 && temp.total < log[i-1].total{
+			log[i] = log[i-1]
+			i--
+		}
+		log[i] = temp
+		pass++
+	}
+	fmt.Println("Sorting Log Menurun (DESCENDING)")
+	logHeader()
+}
+
