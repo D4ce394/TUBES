@@ -2,6 +2,6 @@ package main
 
 func main(){
 	data_gudang()
-	index()
-
+	data_akun()
+	dash()
 }

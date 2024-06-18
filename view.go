@@ -4,6 +4,64 @@ import (
 	"fmt"
 )
 
+func dash(){
+	var punyaAkun string
+	fmt.Println("----------------------------------------")
+	fmt.Println("            Selamat Datang Di           ")
+	fmt.Println("                 DR.Mart                ")
+	fmt.Println("----------------------------------------")
+	fmt.Println("Apakah Anda Sudah Memiliki Akun?        ")
+	fmt.Print("YA/Tidak : ")
+	fmt.Scan(&punyaAkun)
+	fmt.Println("----------------------------------------")
+
+	if punyaAkun == "YA"{
+		login()
+	}else{
+		buatAkun()
+	}
+}
+
+func login(){
+	var username, password string
+	fmt.Println("----------------------------------------")
+	fmt.Println("            Selamat Datang Di           ")
+	fmt.Println("                 DR.Mart                ")
+	fmt.Println("             Silahkan Login             ")
+	fmt.Println("Username :                              ")
+	fmt.Scan(&username)
+	fmt.Println("Password :                              ")
+	fmt.Scan(&password)
+	fmt.Println("----------------------------------------")
+	if validasi(username, password){
+		fmt.Println("Login Berhasil")
+		index()
+	}else{
+		fmt.Println("Username atau password anda salah")
+		login()
+	}
+}
+
+func buatAkun(){
+	var username, password string
+	fmt.Println("----------------------------------------")
+	fmt.Println("            Selamat Datang Di           ")
+	fmt.Println("                 DR.Mart                ")
+	fmt.Println("            Silahkan Register           ")
+	fmt.Println("Username :                              ")
+	fmt.Scan(&username)
+	fmt.Println("Password :                              ")
+	fmt.Scan(&password)
+	fmt.Println("----------------------------------------")
+	if !cekDuplikat(username, password){
+		register(username, password)
+	}else{
+		fmt.Println("Username Tidak Boleh Sama")
+		buatAkun()
+	}
+}
+
+
 func index() {
 	var pilih int = -1
 	for pilih != 0 {
@@ -26,6 +84,7 @@ func index() {
 			logHeader()
 		}
 	}
+	login()
 }
 
 func view_belanja() {

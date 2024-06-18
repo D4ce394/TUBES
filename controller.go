@@ -396,3 +396,47 @@ func logMenurun(){
 	logHeader()
 }
 
+func validasi(username, password string) bool {
+	i := 0
+	var isLogin bool
+	for i < jumlah_akun(){
+		if username == tabLogin[i].username && password == tabLogin[i].password{
+			isLogin = true
+		}else{
+			isLogin = false
+		}
+		i++
+	}
+	return isLogin
+}
+
+func jumlah_akun()int{
+	var kosong loginData
+	a := 0
+	for i := 0; tabLogin[i] != kosong; i++ {
+		a++
+	}
+	return a
+}
+
+func register(username, password string){
+	i := jumlah_akun()
+	tabLogin[i].username = username
+	tabLogin[i].password = password
+	fmt.Println("Akun Telah Dibuat Harap login")
+	login()
+}
+
+func cekDuplikat(username, password string)bool{
+	var duplikat bool
+	i := 0
+	for i < jumlah_akun(){
+		if tabLogin[i].username == username{
+			duplikat = true
+		}else{
+			duplikat = false
+		}
+		i++
+	}
+	return duplikat
+}

@@ -17,6 +17,15 @@ type logData struct {
 }
 var log [NMAX]logData
 
+type loginData struct {
+	username, password string
+}
+var tabLogin [NMAX]loginData
+func data_akun(){
+	tabLogin[0].username = "admin"
+	tabLogin[0].password = "123"
+}
+
 var gudang [NMAX]data
 func data_gudang(){
 
